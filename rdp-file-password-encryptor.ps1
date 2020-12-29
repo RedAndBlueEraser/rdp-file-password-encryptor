@@ -1,6 +1,6 @@
 <#
 rdp-file-password-encryptor.ps1
-Version 20181028
+Version 20201229
 Written by Harry Wong (RedAndBlueEraser)
 #>
 
@@ -18,13 +18,13 @@ Get the byte stream (as a hexadecimal string) of the encrypted password "mysecre
 
 Param(
     [Parameter(Mandatory=$true)]
-    [string]$password
+    [string]$Password
 )
 
 Add-Type -AssemblyName System.Security
 
 [System.Text.UnicodeEncoding]$encoding = [System.Text.Encoding]::Unicode
-[byte[]]$passwordAsBytes = $encoding.GetBytes($password)
+[byte[]]$passwordAsBytes = $encoding.GetBytes($Password)
 [byte[]]$passwordEncryptedAsBytes = [System.Security.Cryptography.ProtectedData]::Protect($passwordAsBytes, $null, [System.Security.Cryptography.DataProtectionScope]::CurrentUser)
-[string]$passwordEncryptedAsHex = ($passwordEncryptedAsBytes | ForEach-Object ToString X2) -join ""
+[string]$passwordEncryptedAsHex = -join ($passwordEncryptedAsBytes | ForEach-Object { $_.ToString("X2") })
 return $passwordEncryptedAsHex
