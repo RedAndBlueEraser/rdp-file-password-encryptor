@@ -53,4 +53,4 @@ This returns the decrypted password.
 
 ## Author
 
-Harry Wong (RedAndBlueEraser) RedAndBlueEraser@outlook.com
+RedAndBlueEraser
